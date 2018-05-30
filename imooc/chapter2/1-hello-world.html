@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>Vue 将会递归将 data 的属性转换为 getter/setter，从而让 data 的属性能够响应数据变化。</h2>
+    <h2>实例创建之后，可以通过 vm.$data 访问原始数据对象。</h2>
+    <h2>Vue 实例也代理了 data 对象上所有的属性，因此访问 vm.a 等价于访问 vm.$data.a。</h2>
+    
+    <div id="app">{{content}}</div>
+    
+    <script>
+        let data = {
+            content: 'Leonardo Davinci'
+        };
+
+        let app = new Vue({
+            el: '#app',
+            data: data
+        });
+
+        console.log(data === app.$data); // true
+        console.log(app.content === app.$data.content); // true
+
+        setTimeout(() => {
+            app.$data.content = 'Jack Sparrow';
+        }, 3000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>:content是v-bind:conent的简写，@click是v-on:click的简写</h2>
+    <div id="app">
+        <input type="text" v-model="turtle" />
+        <button type="button" v-on:click="addTurtle">添加</button>
+        <ul>
+            <todo-item v-for="(item,index) in list" :content="item" :i="index" @delete="handleItemDelete"></todo-item>
+        </ul>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                turtle: '',
+                list: []
+            },
+            components: {
+                'TodoItem': {
+                    props: ['content', 'i'],
+                    template: `<li @click="handleItemClick">{{content}}</li>`,
+                    methods: {
+                        handleItemClick: function () {
+                            this.$emit('delete', this.i);
+                        }
+                    }
+                }
+            },
+            methods: {
+                addTurtle: function () {
+                    this.list.push(this.turtle);
+                    this.turtle = '';
+                },
+                handleItemDelete: function (index) {
+                    this.list.splice(index, 1);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

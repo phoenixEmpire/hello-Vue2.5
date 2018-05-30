@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../asset/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+    <h2>jQuery.proxy()</h2>
+    <p>通常用来在元素上绑定事件处理函数，而且将事件处理函数的上下文指向另一个对象。</p>
+    <p>此外，将原函数传入jQuery.bind()方法，可以正确地取消事件绑定。</p>
+
+    <div>
+        <input type="text" id="name" />
+        <button type="button" id="btn">添加</button>
+        <ul id="list">
+
+        </ul>
+    </div>
+
+    <script>
+        // 用面向对象的方式，开发MVP模式
+
+        function Page() {
+
+        }
+
+        $.extend(Page.prototype, { // 在原型上添加三个方法
+            init: function () {
+                this.bindEvents();
+            },
+            bindEvents: function () {
+                var btn = $('#btn');
+                btn.click($.proxy(this.handleBtnClick, this));
+            },
+            handleBtnClick: function () {
+                let ele = $('#name');
+                let val = ele.val();
+                let ul = $('#list');
+                ul.append(`<li>${val}</li>`);
+                ele.val('');
+            }
+        });
+
+        let page = new Page();
+        page.init();
+    </script>
+</body>
+
+</html>
