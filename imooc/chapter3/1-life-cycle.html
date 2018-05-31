@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue实例生命周期</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>生命周期钩子的 this 上下文指向调用它的 Vue 实例。</h2>
+    <h2>不要在选项属性或回调上使用箭头函数</h2>
+    
+    <nav>
+        <button type="button" onclick="destroy();">销毁</button>
+        <button type="button" onclick="update();">变更</button>
+    </nav>
+    <div id="app">{{content}}</div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                content: 'Don'
+            },
+            beforeCreate: function () {
+                console.log('beforeCreate钩子');
+            },
+            created: function () {
+                console.log('created钩子');
+            },
+            beforeMount: function () {
+                console.log('beforeMount钩子');
+                console.log(this.$el); // <div id="app">{{content}}</div>
+            },
+            mounted: function () {
+                console.log('mounted钩子');
+                console.log(this.$el); // <div id="app">Don</div>
+            },
+            beforeUpdate: function () {
+                console.log('beforeUpdate钩子');
+            },
+            updated: function () {
+                console.log('updated钩子');
+            },
+            beforeDestroy: function () {
+                console.log('beforeDestroy钩子');
+            },
+            destroyed: function () {
+                console.log('destroyed钩子');
+            }
+        });
+    </script>
+    
+    <script>
+        function destroy() {
+            vm.$destroy();
+        }
+
+        function update() {
+            vm.content = 'Mikey';
+        }
+    </script>
+</body>
+
+</html>

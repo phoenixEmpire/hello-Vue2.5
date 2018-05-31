@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性、方法与侦听器</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>计算属性、侦听器 : 模版初次渲染/相关依赖发生改变时执行</h2>
+    <h2>方法：模版初次渲染/重新渲染时执行。</h2>
+
+    <nav>
+        <button type="button" onclick="changeCartoon();">更改动漫</button>
+        <button type="button" onclick="changeWords();">更改名称</button>
+    </nav>
+    <div id="app">
+        <p>{{cartoon}}</p>
+        <p>计算属性 : {{fullWord}}</p>
+        <p>方法 : {{fullWordMethod()}}</p>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                cartoon: 'Pirates of the Caribbean',
+                firstWord: 'Jack',
+                secondWord: '  Sparrow',
+                fullWordWatch: 'Jack Sparrow'
+            },
+            computed: { // 计算属性
+                fullWord: function () {
+                    console.log('计算属性');
+                    return this.firstWord + this.secondWord;
+                }
+            },
+            methods: { // 方法
+                fullWordMethod: function () {
+                    console.log('方法');
+                    return this.firstWord + this.secondWord;
+                }
+            },
+            watch: { //  侦听器
+                firstWord: function () {
+                    console.log('侦听器 : fristWord');
+                    this.fullWordWatch = this.firstWord + this.secondWord;
+                },
+                secondWord: function () {
+                    console.log('侦听器 : fristWord');
+                    this.fullWordWatch = this.firstWord + this.secondWord;
+                }
+            }
+        });
+    </script>
+
+    <script>
+        function changeCartoon() {
+            vm.cartoon = 'Kung Fu Panda';
+        }
+
+        function changeWords() {
+            vm.firstWord = 'Michelangelo';
+        }
+    </script>
+</body>
+
+</html>

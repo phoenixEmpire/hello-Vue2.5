@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性的getter和setter</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>计算属性默认只有 getter ，不过在需要时你也可以提供一个 setter </h2>
+
+    <nav>
+        <button type="button" onclick="change();">更改</button>
+    </nav>
+    <div id="app">
+        <p>{{fullWord}}</p>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                firstWord: 'Jack',
+                secondWord: '  Sparrow'
+            },
+            computed: { // 计算属性
+                fullWord: {
+                    // getter
+                    get: function () {
+                        return this.firstWord + this.secondWord;
+                    },
+                    //setter
+                    set: function (words) {
+                        let arr = words.split(' ');
+                        this.firstWord = arr[0];
+                        this.secondWord = arr[1];
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        function change() {
+            vm.fullWord = 'Leonardo DaVinci';
+        }
+    </script>
+</body>
+
+</html>
