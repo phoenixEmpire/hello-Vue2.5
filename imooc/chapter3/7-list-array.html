@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的列表渲染 (数组)</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>直接用下标操作数组元素，Vue不会检测到</h2>
+
+    <nav>
+        <button type="button" onclick="replace();">替换数组</button>
+        <button type="button" onclick="variant();">变异方法</button>
+        <button type="button" onclick="set();">set方法</button>
+    </nav>
+
+    <div id="app">
+        <div v-for="(item,index) of list">
+            {{index}} --- {{item}}
+        </div>
+    </div>
+
+    <script>
+
+        let vm = new Vue({ // 创建一个Vue实例(根组件)
+            el: '#app',
+            data: {
+                list: ['Leo', 'Mike', 'Raph', 'Don']
+            }
+        });
+
+        function replace() {
+            // filter(), concat() 和 slice() 不会改变原始数组，但总是返回一个新数组
+            vm.list = vm.list.filter((item) => item.length <= 3);
+        }
+
+        function variant() {
+            vm.list.push('Jack Sparrow');
+        }
+
+        function set() {
+            vm.$set(vm.list, vm.list.length, 'Shredder');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue中的条件渲染</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <h2>带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS 属性 display。</h2>
+    <h2>v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。</h2>
+    <h2>Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。</h2>
+    <h2>添加一个具有唯一值的 key 属性，来表达“这两个元素是完全独立的，不要复用它们”</h2>
+
+    <div id="app">
+        <div>
+            <span @click="toggleVisible">显示/隐藏</span>
+        </div>
+
+        <div v-show="show">v-show</div>
+        <div v-if="show">v-if</div>
+
+        <div>
+            <span @click="toggleLoginType">切换登录方式</span>
+        </div>
+
+        <!-- 可以把一个 <template> 元素当做不可见的包裹元素 -->
+        <template v-if="loginType=='username'">
+            <label>用户名：</label>
+            <input type="text" placeholder="请输入用户名" key="username-input" />
+        </template>
+        <template v-else>
+            <label>邮箱：</label>
+            <input type="email" placeholder="请输入邮箱" key="email-input" />
+        </template>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                show: false,
+                loginType: 'username'
+            },
+            methods: {
+                toggleVisible: function () {
+                    this.show = !this.show;
+                },
+                toggleLoginType: function () {
+                    this.loginType = this.loginType === 'username' ? 'email' : 'username';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

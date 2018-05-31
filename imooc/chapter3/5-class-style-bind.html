@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue中的样式绑定</title>
+    <style type="text/css">
+        .pirate {
+            font-size: 26px;
+        }
+
+        .captain {
+            color: red;
+        }
+    </style>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>将 v-bind 用于 class时，表达式的结果可以是字符串、对象、字符串数组</h2>
+    <h2>将 v-bind 用于 style时，表达式的结果可以是对象、对象数组</h2>
+    
+    <div id="app">
+        <!-- 类名绑定 -->
+        <div :class="classStr" @click="handleClickClassStr">Jack Sparrow</div>
+        <div :class="classObj" @click="handleClickClassObj">Jack Sparrow</div>
+        <div :class="classArr">Jack Sparrow</div>
+        <!-- 内联样式绑定 -->
+        <div :style="styleObj">Michelangelo</div>
+        <div :style="styleArr">Michelangelo</div>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                classStr: '',
+                classObj: {
+                    pirate: false
+                },
+                classArr: ['pirate', 'captain'],
+                styleObj: {
+                    fontSize: '26px'
+                },
+                styleArr: [
+                    {
+                        fontSize: '26px'
+                    },
+                    {
+                        color: 'green'
+                    }
+                ]
+            },
+            methods: {
+                handleClickClassStr: function () {
+                    this.classStr = this.classStr === '' ? 'pirate' : '';
+                },
+                handleClickClassObj: function () {
+                    this.classObj.pirate = !this.classObj.pirate;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
