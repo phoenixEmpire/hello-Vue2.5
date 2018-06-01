@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例</h2>
+
+    <div id="app">
+        <div ref="film" @click="handleClick">Pirates of the Caribbean</div>
+        <counter ref="one" @add="handleAdd"></counter>
+        <counter ref="two" @add="handleAdd"></counter>
+        {{total}}
+    </div>
+
+    <script>
+        Vue.component('counter', {
+            template: `
+                <div @click="handleClick">计算器组件 : {{number}}</div>
+            `,
+            data: function () {
+                return {
+                    number: 0
+                };
+            },
+            methods: {
+                handleClick: function () {
+                    this.number++;
+                    this.$emit('add');
+                }
+            }
+        });
+
+        let app = new Vue({ // 创建一个Vue实例(根组件)
+            el: '#app',
+            data: {
+                total: 0
+            },
+            methods: {
+                handleClick: function () {
+                    console.log(this.$refs.film.innerText);
+                },
+                handleAdd: function () {
+                    this.total = this.$refs.one.number + this.$refs.two.number;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

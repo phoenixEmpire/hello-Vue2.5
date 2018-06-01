@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM元素限制</title>
+    <style type="text/css">
+        td {
+            border: 1px solid black;
+        }
+    </style>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h4>有些 HTML 元素，诸如 ul、ol、table 和 select，对于哪些元素可以出现在其内部是有严格限制的。</h4>
+    <h4>而有些元素，诸如 li、tr 和 option，只能出现在其它某些特定的元素内部。</h4>
+    <h4>is可以避免自定义组件被作为无效的内容提升到外部，并导致最终渲染结果出错。</h4>
+
+    <div id="app">
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        Vue.component('row', {
+            template: `
+                <tr>
+                    <td>单元格</td>
+                </tr>
+            `
+        });
+        let app = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>

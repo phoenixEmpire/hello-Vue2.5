@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子组件向父组件传值</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{character}}
+        <role @show="handleShow"></role>
+    </div>
+
+    <script>
+        Vue.component('role', {
+            template: `<div @click="handleClick">登场</div>`,
+            methods: {
+                handleClick: function () {
+                    this.$emit('show', 'Leonardo Da Vinci');
+                }
+            }
+        });
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                character: ''
+            },
+            methods: {
+                handleShow: function (character) {
+                    this.character = character;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

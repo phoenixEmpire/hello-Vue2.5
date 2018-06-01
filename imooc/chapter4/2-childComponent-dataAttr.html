@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件的data数据属性</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>根组件的data属性是对象，子组件的data属性是函数。</h2>
+
+    <div id="app">
+        {{film}}
+        <role></role>
+    </div>
+
+    <script>
+        Vue.component('role', {
+            data: function () {
+                return {
+                    captain: 'Jack Sparrow'
+                };
+            },
+            template: `
+                <div>{{captain}}</div>
+            `
+        });
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                film: 'Pirates of the Caribbean'
+            }
+        });
+    </script>
+</body>
+
+</html>
