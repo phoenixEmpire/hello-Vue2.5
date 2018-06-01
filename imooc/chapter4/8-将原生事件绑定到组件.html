@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>将原生事件绑定到组件</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>Vue.js 2.5中，将原生事件绑定到组件上，要使用 v-on 的 .native 修饰符。</h2>
+    <h2>Angular 6中，将原生事件、自定义事件绑定到组件上，语法是相同的。</h2>
+
+    <div id="app">
+        <cartoon @click.native="handleClick"></cartoon>
+    </div>
+
+    <script>
+        Vue.component('cartoon', {
+            template: `
+               <div>Kung Fu Panda 4</div>
+            `
+        });
+        let app = new Vue({
+            el: '#app',
+            methods: {
+                handleClick: function () {
+                    console.log('单击事件');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

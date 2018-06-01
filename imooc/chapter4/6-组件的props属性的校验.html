@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件的props属性的校验</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <pirates address="Caribbean" shipmaster="Jack Sparrow" captain="Hector Barbossa">
+        </pirates>
+    </div>
+
+    <script>
+        Vue.component('pirates', {
+            props: {
+                address: String, // 检测类型
+                shipmaster: [String, Number],// 检测类型
+                captain: {// 检测类型 + 其他验证
+                    type: String,
+                    default: 'Salazar',
+                    require: false,
+                    validator: function (val) {
+                        return val.length >= 3;
+                    }
+                }
+            },
+            template: `
+                <div>
+                    <div>{{address}}</div>
+                    <div>{{shipmaster}}</div>
+                    <div>{{captain}}</div>
+                </div>
+            `
+        });
+        let app = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>

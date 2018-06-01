@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>非prop的特性</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>一个非 prop 特性是指传向一个组件，但是该组件并没有相应 prop 定义的特性。</h2>
+    <h2>非 prop 特性会自动添加到组件的根元素上。</h2>
+    
+    <div id="app">
+       <cartoon name="Kung Fu Panda 4"></cartoon>
+    </div>
+
+    <script>
+        Vue.component('cartoon', {
+            template: `
+               <div>Cartoon</div>
+            `
+        });
+        let app = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>
