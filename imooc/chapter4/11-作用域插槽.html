@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作用域插槽</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>可以通过 slot-scope 特性从子组件获取数据</h2>
+    <h2>在 2.5.0+，slot-scope 不再限制在 template 元素上使用，而可以用在插槽内的任何元素或组件上。</h2>
+
+    <div id="app">
+        <film>
+            <template slot-scope="context">
+                <li>{{context.item}}</li>
+            </template>
+        </film>
+    </div>
+
+    <script>
+
+        Vue.component('film', {
+            data: function () {
+                return {
+                    list: ['Leo', 'Raph', 'Mikey', 'Don']
+                };
+            },
+            template: `
+                <ul>
+                    <slot v-for="item of list" :item="item"></slot>
+                </ul>
+            `
+        });
+
+        let app = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>

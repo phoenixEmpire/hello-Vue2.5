@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>插槽</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 不使用插槽 -->
+        <no-use-slot game="<i>Neo Contra</i>"></no-use-slot>
+        <!-- 使用无名插槽 -->
+        <no-name-slot>
+            <i>Ace Combat</i>
+        </no-name-slot>
+        <!-- 使用具名插槽 -->
+        <name-slot>
+            <div slot="prev">PlayStation 1</div>
+            <div slot="next">PlayStation 6</div>
+        </name-slot>
+    </div>
+
+    <script>
+        Vue.component('no-use-slot', {
+            props: ['game'],
+            template: `
+                <div v-html="game"></div>
+            `
+        });
+
+        Vue.component('no-name-slot', {
+            template: `
+                <div>
+                    <div>hello</div>
+                    <slot>Namoco ( 默认内容 )</slot>
+                </div>
+            `
+        });
+
+        Vue.component('name-slot', {
+            template:`
+                <div>
+                    <slot name="prev"></slot>
+                    <div>PlayStation 2</div>
+                    <slot name="next"></slot>
+                </div>
+            `
+        });
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

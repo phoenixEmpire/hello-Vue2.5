@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态组件</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <h2>渲染一个“元组件”为动态组件。依 is 的值，来决定哪个组件被渲染。</h2>
+
+    <div id="app">
+        <button type="button" @click="toggle">切换</button>
+        <component :is="type"></component>
+    </div>
+
+    <script>
+        Vue.component('apple', {
+            template: `<div>apple</div>`
+        });
+
+        Vue.component('pineapple', {
+            template: `<div>pineapple</div>`
+        });
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                type: 'apple'
+            },
+            methods: {
+                toggle: function () {
+                    this.type = this.type === 'apple' ? 'pineapple' : 'apple';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
