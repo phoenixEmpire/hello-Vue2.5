@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过渡</title>
+    <style type="text/css">
+        .v-enter-active {
+            transition: opacity 3s;
+        }
+
+        .v-enter {
+            opacity: 0;
+        }
+
+        .v-leave-active {
+            transition: opacity 3s;
+        }
+
+        .v-leave-to {
+            opacity: 0;
+        }
+    </style>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>Vue 提供了 transition 的封装组件</h2>
+    <h2>在进入/离开的过渡中，会有 6 个 class 切换。</h2>
+    <h2>对于这些在过渡中切换的类名来说，如果你使用一个没有名字的 &lt;transition&gt;，则 v- 是这些类名的默认前缀。</h2>
+
+    <div id="app">
+        <button type="button" @click="toggle">切换</button>
+        <transition>
+            <div v-if="show">Hector Barbossa</div>
+        </transition>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                toggle: function () {
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
