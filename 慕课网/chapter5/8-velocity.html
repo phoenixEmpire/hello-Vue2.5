@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用Velocity.js</title>
+    <script src="../../asset/vue.js"></script>
+    <script src="../../asset/velocity.min.js"></script>
+</head>
+
+<body>
+
+    <h2>Velocity 和 jQuery.animate 的工作方式类似，也是用来实现 JavaScript 动画的一个很棒的选择</h2>
+
+    <div id="app">
+        <button type="button" @click="toggle">切换</button>
+        <transition @before-enter="beforeEnterHandle" @enter="enterHandle" @after-enter="afterEnterHandle">
+            <div v-if="show">Hector Barbossa</div>
+        </transition>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                toggle: function () {
+                    this.show = !this.show;
+                },
+                beforeEnterHandle: function (el) {
+                    el.style.color = 'red';
+                },
+                enterHandle: function (el, done) {
+                    Velocity(el, { color: 'blue' }, { duration: 3000, complete: done });
+                },
+                afterEnterHandle: function (el) {
+                    el.style.color = 'orange';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

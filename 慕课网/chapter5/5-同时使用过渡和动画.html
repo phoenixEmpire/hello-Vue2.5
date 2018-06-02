@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>同时使用过渡和动画</title>
+    <link rel="stylesheet" type="text/css" href="../../asset/animate.css" />
+    <style type="text/css">
+        .fade-enter-active {
+            transition: opacity 3s;
+        }
+
+        .fade-enter {
+            opacity: 0;
+        }
+
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
+
+        .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <h2>Vue 为了知道过渡的完成，必须设置相应的事件监听器。它可以是 transitionend 或 animationend</h2>
+    <h2>在一些场景中，你需要给同一个元素同时设置两种过渡动效。过渡、动画的持续时间不一致时，Vue可能会取最长的时间。使用 type 特性并设置 animation 或 transition 来明确声明你需要 Vue 监听的类型。</h2>
+
+    <div id="app">
+        <button type="button" @click="show = !show;">切换</button>
+        <transition name="fade" type="transition" appear appear-active-class="animated swing" enter-active-class="animated swing fade-enter-active" leave-active-class="animated shake fade-leave-active">
+            <div v-if="show">Hector Barbossa</div>
+        </transition>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            }
+        });
+    </script>
+</body>
+
+</html>

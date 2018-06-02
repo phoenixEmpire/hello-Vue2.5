@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定制进入和移出的持续时间</title>
+    <link rel="stylesheet" type="text/css" href="../../asset/animate.css" />
+    <style type="text/css">
+        .fade-enter-active {
+            transition: opacity 3s;
+        }
+
+        .fade-enter {
+            opacity: 0;
+        }
+
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
+
+        .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <h2>定制进入和移出的持续时间：:duration="{ enter: 500, leave: 800 }"</h2>
+    <h2>添加、删除类名，以duration为准，而不是transitionend、animationend</h2>
+
+    <div id="app">
+        <button type="button" @click="show = !show;">切换</button>
+        <transition :duration="10000" name="fade" appear appear-active-class="animated swing" enter-active-class="animated swing fade-enter-active" leave-active-class="animated shake fade-leave-active">
+            <div v-if="show">Hector Barbossa</div>
+        </transition>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            }
+        });
+    </script>
+</body>
+
+</html>

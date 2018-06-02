@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>多个元素的过渡</title>
+    <style type="text/css">
+        .v-enter-active {
+            transition: opacity 3s;
+        }
+
+        .v-enter {
+            opacity: 0;
+        }
+
+        .v-leave-active {
+            transition: opacity 3s;
+        }
+
+        .v-leave-to {
+            opacity: 0;
+        }
+    </style>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <h2>当有相同标签名的元素切换时，需要通过 key 特性设置唯一的值来标记以让 Vue 区分它们，否则 Vue 为了效率只会替换相同标签内部的内容。</h2>
+    <h2>即使在技术上没有必要，给在 &lt;transition&gt; 组件中的多个元素设置 key 是一个更好的实践。</h2>
+
+    <h2> Vue 提供了过渡模式:in-out、out-in</h2>
+
+    <div id="app">
+        <button type="button" @click="toggle">切换</button>
+        <transition mode="out-in">
+            <div v-if="show" key="jack">Jack Sparrow</div>
+            <div v-else key="salazar">Salazar</div>
+        </transition>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                toggle: function () {
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>javascript钩子</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <button type="button" @click="toggle">切换</button>
+        <transition @before-enter="beforeEnterHandle" @enter="enterHandle" @after-enter="afterEnterHandle">
+            <div v-if="show">Hector Barbossa</div>
+        </transition>
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                toggle: function () {
+                    this.show = !this.show;
+                },
+                beforeEnterHandle: function (el) {
+                    el.style.color = 'red';
+                },
+                enterHandle: function (el, done) {
+                    setTimeout(() => {
+                        el.style.color = 'green';
+                    }, 2000);
+                    setTimeout(() => {
+                        done();
+                    }, 4000);
+                },
+                afterEnterHandle:function(el){
+                    el.style.color = 'orange';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

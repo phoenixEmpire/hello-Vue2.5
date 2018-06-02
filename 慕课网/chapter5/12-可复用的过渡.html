@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>可复用的过渡</title>
+    <script src="../../asset/vue.js"></script>
+</head>
+
+<body>
+    <h2>过渡可以通过 Vue 的组件系统实现复用。要创建一个可复用过渡组件，你需要做的就是将 &lt;transition&gt; 或者 &lt;transition-group&gt; 作为根组件，然后将任何子组件放置在其中就可以了。</h2>
+
+    <div id="app">
+        <button type="button" @click="toggle">切换</button>
+        <fade :show="show">
+            <div>Salazar</div>
+        </fade>
+    </div>
+
+    <script>
+        Vue.component('fade', {
+            props: ['show'],
+            template: `
+                <transition @before-enter="beforeEnterHandler"
+                            @enter="enterHandler">
+                    <slot v-if="show"></slot>
+                </transition>
+            `,
+            methods: {
+                beforeEnterHandler: function (el) {
+                    el.style.color = 'red';
+                },
+                enterHandler: function (el, done) {
+                    setTimeout(() => {
+                        el.style.color = 'green';
+                        done();
+                    }, 2000);
+                }
+            }
+        });
+        let app = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                toggle: function () {
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
